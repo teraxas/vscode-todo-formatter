@@ -4,28 +4,33 @@ import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
 
-    // 👎 formatter implemented as separate command
-    vscode.commands.registerCommand('extension.format-foo', () => {
-        const {activeTextEditor} = vscode.window;
-
-        if (activeTextEditor && activeTextEditor.document.languageId === 'foo-lang') {
-            const {document} = activeTextEditor;
-            const firstLine = document.lineAt(0);
-            if (firstLine.text !== '42') {
-                const edit = new vscode.WorkspaceEdit();
-                edit.insert(document.uri, firstLine.range.start, '42\n');
-                return vscode.workspace.applyEdit(edit)
-            }
-        }
-    });
-
-    // 👍 formatter implemented using API
-    vscode.languages.registerDocumentFormattingEditProvider('foo-lang', {
+    vscode.languages.registerDocumentFormattingEditProvider('todo-lang', {
         provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
-            const firstLine = document.lineAt(0);
-            if (firstLine.text !== '42') {
-                return [vscode.TextEdit.insert(firstLine.range.start, '42\n')];
-            }
+            let todoList = `\n$ Updated on ${new Date().toISOString()}`
+            const todoListLines = document.getText()
+                .split(/\r?\n/)
+                .filter(v => v.trim().length > 2 && !v.startsWith('$'))
+                .map(l => {
+                    if (!l.startsWith('[]') && !l.startsWith('[*]')) {
+                        return '[] ' + l;
+                    } else {
+                        return l;
+                    }
+                })
+                .sort((a, b) => b[1] > a[1] ? 1 : -1);
+
+            const doneCount = todoListLines.filter(l => l.startsWith('[*]')).length;
+            todoList += `\n$ Done: ${doneCount}, Todo: ${todoListLines.length - doneCount}, Total: ${todoListLines.length}`;
+            todoList += `\n$ ==================================================`
+            todoList += '\n\n' + todoListLines.join('\n');
+            todoList += `\n\n$ ==================================================\n`
+
+            var firstLine = document.lineAt(0);
+            var lastLine = document.lineAt(document.lineCount - 1);
+            var textRange = new vscode.Range(firstLine.range.start, lastLine.range.end);
+            return [
+                vscode.TextEdit.replace(textRange, todoList)
+            ];
         }
     });
 }

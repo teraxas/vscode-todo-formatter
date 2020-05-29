@@ -1,9 +1,8 @@
 {
-    "name": "formatter-sample",
+    "name": "formatter-todo-lang",
     "displayName": "formatter-sample",
-    "description": "",
+    "description": "Formats TODO files",
     "version": "0.0.1",
-    "publisher": "jrieken",
     "engines": {
         "vscode": "^1.6.0"
     },
@@ -11,25 +10,19 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:foo-lang"
+        "onLanguage:todo-lang"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "languages": [
             {
-                "id": "foo-lang",
+                "id": "todo-lang",
                 "aliases": [
-                    "Foo"
+                    "Todo"
                 ],
                 "extensions": [
-                    "foo"
+                    "todo"
                 ]
-            }
-        ],
-        "commands": [
-            {
-                "command": "extension.format-foo",
-                "title": "(Bad) Format Foo Files"
             }
         ]
     },
@@ -38,7 +31,7 @@
     },
     "devDependencies": {
         "@types/node": "*",
-        "vscode": "1.0.3",
+        "vscode": "1.1.37",
         "typescript": "2.0.6"
     }
 }
