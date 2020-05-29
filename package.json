@@ -13,7 +13,7 @@
         "onLanguage:todo-lang"
     ],
     "main": "./out/src/extension",
-    "publisher": "Karolis Jocevičius",
+    "publisher": "teraxas",
     "author": "Karolis Jocevičius",
     "contributes": {
         "languages": [
