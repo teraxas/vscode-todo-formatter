@@ -29,11 +29,16 @@
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install && tsc"
+        "postinstall": "node ./node_modules/vscode/bin/install && tsc",
+        "vsce": "vsce",
+        "build": "tsc",
+        "package": "vsce package"
     },
     "devDependencies": {
         "@types/node": "*",
         "vscode": "1.1.37",
-        "typescript": "2.0.6"
-    }
+        "typescript": "2.0.6",
+        "vsce": "^1.75.0"
+    },
+    "dependencies": {}
 }
