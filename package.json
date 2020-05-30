@@ -12,6 +12,10 @@
     "activationEvents": [
         "onLanguage:todo-lang"
     ],
+    "repository": {
+        "url": "https://github.com/teraxas/vscode-todo-formatter",
+        "type": "git"
+    },
     "main": "./out/src/extension",
     "publisher": "teraxas",
     "author": "Karolis Jocevičius",
@@ -32,7 +36,7 @@
         "postinstall": "node ./node_modules/vscode/bin/install && tsc",
         "vsce": "vsce",
         "build": "tsc",
-        "package": "vsce package"
+        "package": "npm run build && vsce package"
     },
     "devDependencies": {
         "@types/node": "^12.0.0",
