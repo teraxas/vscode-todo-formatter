@@ -2,7 +2,7 @@
     "name": "formatter-todo-lang",
     "displayName": "formatter-todo-lang",
     "description": "Formats TODO files",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.6.0"
     },
